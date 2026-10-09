@@ -17,4 +17,4 @@
 
 На телефоне: перетаскивание карты одним пальцем; кнопки `+` и `−` меняют масштаб, меню вверху прокручивается вбок. Кнопка «Обзор» возвращает общий вид.
 
-Список закупок для Ксюши: https://docs.google.com/document/d/1bvOOre18qKLF-_ccLX8PYXQdLorufIrP5-oWm6LyvM8/edit
+Google Таблица закупок для Ксюши: https://docs.google.com/spreadsheets/d/17fOZn-fL7tQPtsEY9k15G78_fpH_ucm3zLVNt2oBqrw/edit
