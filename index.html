@@ -64,16 +64,57 @@
 <div id="activities" class="floating"><h3>Все 11 активностей</h3><div class="muted">Часть свободно · часть по времени</div><div class="act"><span class="num">01</span><span>Шпионы трёх фракций</span></div><div class="act"><span class="num">02</span><span>Квесты с доски объявлений</span></div><div class="act"><span class="num">03</span><span>Поиск 15 предметов</span></div><div class="act"><span class="num">04</span><span>Восемь загадок</span></div><div class="act"><span class="num">05</span><span>Пять карт сокровищ</span></div><div class="act"><span class="num">06</span><span>Бирпонг</span></div><div class="act"><span class="num">07</span><span>Стрельба из лука</span></div><div class="act"><span class="num">08</span><span>Яблоки в тазу</span></div><div class="act"><span class="num">09</span><span>Турнир с мягкими палками</span></div><div class="act"><span class="num">10</span><span>Лучшая тыква</span></div><div class="act"><span class="num">11</span><span>Лучший костюм</span></div></div>
 <div id="timeline" class="floating"><h3>Roadmap дня</h3><div class="section-sub">Распределение времени — рабочий сценарий · главное окончить игру до ужина</div><div class="timeline-row"><div class="seg" style="background:#8D9FDB"></div><div class="seg" style="background:#8D9FDB"></div><div class="seg" style="background:#9B81D4"></div><div class="seg" style="background:#9B81D4"></div><div class="seg" style="background:#9B81D4"></div><div class="seg" style="background:#9B81D4"></div><div class="seg" style="background:#9B81D4"></div><div class="seg" style="background:#DAB578"></div><div class="seg" style="background:#E0A48A"></div><div class="seg" style="background:#CD775F"></div></div><div class="tick-row"><span>14:00</span><span>15:00</span><span>16:00</span><span>17:00</span><span>18:00</span><span>19:00</span><span>19:30</span></div><div class="slots"><div class="slot"><b>14:00–14:45</b>Сбор гостей<small>Конверты и фракции</small></div><div class="slot"><b>14:45–15:00</b>Открытие<small>Правила ведущего</small></div><div class="slot"><b>15:00–16:00</b>Свободная игра<small>Все открытые точки</small></div><div class="slot"><b>16:00–16:25</b>Турнир<small>Арена</small></div><div class="slot"><b>16:30–16:50</b>Яблоки<small>Отдельный конкурс</small></div><div class="slot"><b>16:50–17:40</b>Финальные квесты<small>Закрытие голосований</small></div><div class="slot"><b>17:40–18:00</b>Подсчёт + призы<small>Фракции и конкурсы</small></div><div class="slot"><b>18:00–19:00</b>Ужин<small>Зелёная зона</small></div><div class="slot"><b>19:00–19:30</b>Костёр — подготовка</div><div class="slot"><b>с 19:30</b>Маршмеллоу<small>Свободный вечер</small></div></div></div>
 <div id="questions" class="floating"><h3>Обсудить на встрече</h3><div class="section-sub">Нерешённые вопросы — не принимать как готовые правила</div><div class="qgrid"><div class="q"><b>01.</b> Шпионы: длительность и раскрытие</div><div class="q"><b>02.</b> Монеты, ставки и бирпонг</div><div class="q"><b>03.</b> Квесты доски и награды</div><div class="q"><b>04.</b> Platinum: какие усиления</div><div class="q"><b>05.</b> Формат турнира и помост</div><div class="q"><b>06.</b> Подсчёт, грамоты и призы</div></div><div class="linked">Отдельно: физическая расстановка зон по карте Tudor, ответственные по именам. Ужин и костёр — согласованы.</div></div>
-</div></div><div id="hint">Перетаскивай полотно · крути колесо для масштаба · нажми название зоны сверху</div><script>
+</div></div><div id="hint">Одним пальцем двигай карту · двумя пальцами приближай · сверху можно выбрать зону</div><script>
 const view=document.getElementById('viewport'),board=document.getElementById('board');const zoomValue=document.getElementById('zoomvalue');const BW=4250,BH=3460;let scale=.3,ox=0,oy=0,drag=null;
 function apply(){board.style.transform=`translate(${ox}px,${oy}px) scale(${scale})`;zoomValue.textContent=Math.round(scale*100)+'%';}
-function zoomAt(f,px,py){const old=scale;scale=Math.max(.17,Math.min(1.65,scale*f));ox=px-(px-ox)*scale/old;oy=py-(py-oy)*scale/old;apply();}
+function zoomAt(f,px,py){const old=scale;scale=Math.max(.17,Math.min(2.6,scale*f));ox=px-(px-ox)*scale/old;oy=py-(py-oy)*scale/old;apply();}
 function focusArea(id){if(id==='overview'){scale=Math.min((view.clientWidth-44)/BW,(view.clientHeight-160)/BH);ox=(view.clientWidth-BW*scale)/2;oy=(view.clientHeight-BH*scale)/2+35;apply();return;}const el=document.getElementById(id);const x=el.offsetLeft,y=el.offsetTop,w=el.offsetWidth,h=el.offsetHeight;scale=Math.min(1.04,(view.clientWidth-140)/Math.max(w+220,800),(view.clientHeight-140)/Math.max(h+260,720));ox=(view.clientWidth-w*scale)/2-x*scale;oy=(view.clientHeight-h*scale)/2-y*scale;apply();}
 document.querySelectorAll('[data-focus]').forEach(b=>b.addEventListener('click',()=>focusArea(b.dataset.focus)));
 document.getElementById('plus').addEventListener('click',()=>zoomAt(1.2,view.clientWidth/2,view.clientHeight/2));document.getElementById('minus').addEventListener('click',()=>zoomAt(1/1.2,view.clientWidth/2,view.clientHeight/2));
 view.addEventListener('wheel',e=>{e.preventDefault();let r=view.getBoundingClientRect();zoomAt(e.deltaY<0?1.12:1/1.12,e.clientX-r.left,e.clientY-r.top)},{passive:false});
-view.addEventListener('pointerdown',e=>{if(e.button!==0||e.target.closest('a'))return;drag={x:e.clientX,y:e.clientY,ox,oy,id:e.pointerId};view.setPointerCapture(e.pointerId);view.classList.add('grabbing')});
-view.addEventListener('pointermove',e=>{if(!drag)return;ox=drag.ox+e.clientX-drag.x;oy=drag.oy+e.clientY-drag.y;apply()});
-view.addEventListener('pointerup',e=>{drag=null;view.classList.remove('grabbing')});view.addEventListener('pointercancel',()=>{drag=null;view.classList.remove('grabbing')});
+// Unified pointer navigation: one finger/mouse pans; two fingers pinch around their midpoint.
+const activePointers=new Map();
+const localPoint=e=>{const r=view.getBoundingClientRect();return {x:e.clientX-r.left,y:e.clientY-r.top};};
+const pointDist=(a,b)=>Math.hypot(a.x-b.x,a.y-b.y);
+const midPoint=(a,b)=>({x:(a.x+b.x)/2,y:(a.y+b.y)/2});
+view.addEventListener('pointerdown',e=>{
+  if(e.pointerType==='mouse'&&e.button!==0)return;
+  if(e.target.closest('a,button'))return;
+  activePointers.set(e.pointerId,localPoint(e));
+  try{view.setPointerCapture(e.pointerId);}catch(err){}
+  view.classList.add('grabbing');
+  if(e.cancelable)e.preventDefault();
+});
+view.addEventListener('pointermove',e=>{
+  if(!activePointers.has(e.pointerId))return;
+  const prev=activePointers.get(e.pointerId),now=localPoint(e);
+  if(activePointers.size===1){
+    ox+=now.x-prev.x;oy+=now.y-prev.y;
+    activePointers.set(e.pointerId,now);
+  }else{
+    const before=Array.from(activePointers.entries()).slice(0,2).map(v=>v[1]);
+    activePointers.set(e.pointerId,now);
+    const after=Array.from(activePointers.entries()).slice(0,2).map(v=>v[1]);
+    const oldMid=midPoint(before[0],before[1]),newMid=midPoint(after[0],after[1]);
+    const oldDistance=pointDist(before[0],before[1]),newDistance=pointDist(after[0],after[1]);
+    const oldScale=scale;
+    const ratio=oldDistance>3?newDistance/oldDistance:1;
+    scale=Math.max(.17,Math.min(2.6,oldScale*ratio));
+    ox=newMid.x-(oldMid.x-ox)*scale/oldScale;
+    oy=newMid.y-(oldMid.y-oy)*scale/oldScale;
+  }
+  apply();
+  if(e.cancelable)e.preventDefault();
+},{passive:false});
+function finishPointer(e){
+  activePointers.delete(e.pointerId);
+  if(activePointers.size===0)view.classList.remove('grabbing');
+}
+view.addEventListener('pointerup',finishPointer);
+view.addEventListener('pointercancel',finishPointer);
+view.addEventListener('lostpointercapture',finishPointer);
+// Older iOS Safari may emit gesture events in addition to pointers.
+view.addEventListener('gesturestart',e=>{if(e.cancelable)e.preventDefault();},{passive:false});
+view.addEventListener('gesturechange',e=>{if(e.cancelable)e.preventDefault();},{passive:false});
 window.addEventListener('resize',()=>{if(scale<.36)focusArea('overview')});window.addEventListener('keydown',e=>{if(e.key==='0')focusArea('overview');if(e.key==='+')zoomAt(1.2,view.clientWidth/2,view.clientHeight/2);if(e.key==='-')zoomAt(1/1.2,view.clientWidth/2,view.clientHeight/2)});focusArea('overview');
 </script></body></html>
